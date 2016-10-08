@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Predicting Next Word</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Predicting Next Word">
+  <meta name="author" content="Samarjit Roy">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Predicting Next Word</h1>
+    <h2>Natural language processing</h2>
+    <p>Samarjit Roy<br/>Sr Database Administor</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>The Objective</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The main goal of this capstone project is to build a shiny application that is able to predict the next word while typing. 
+Analysis and product was based on The <a href="http://d396qusza40orc.cloudfront.net/dsscapstone/dataset/Coursera-SwiftKey.zip">swiftkey data</a>.</p>
+
+<p>This exercise was divided into three sub tasks as follows:</p>
+
+<ol>
+<li>Data cleansing, exploratory analysis, the creation of a predictive model and test with the test data.<a href="http://www.rpubs.com/samarjitroy/214336">Click to view</a></li>
+<li>Creating n-gram tockenized data for Shiny Apps use. <a href="http://www.rpubs.com/samarjitroy/215586">Click to view</a></li>
+<li>Creating a Shiny Apps Data Product <a href="https://samarjitroy.shinyapps.io/CapstonApps/">Run Shiny App</a></li>
+<li>Creating Slide Deck to present the exercise</li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>The Applied Methods &amp; Models</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>While creating a sample(Training/Test) from the swiftkey source, the data was cleaned by conversion to lowercase, removing punctuation, links, white space, numbers and all kinds of special characters. The sample was then tokenized into n-grams.</p>
+
+<p>The aggregated bi-gram,tri-gram and quad-gram term frequency matrices have been transferred into data frame.</p>
+
+<p>The resulting data.frames are used to predict the next word in connection with the text input by a user of the shiny apps.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>The Usage Of The Application</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The user interface of Shiny App has user input box to type and print suggested word. While entering the text (1), the field with the predicted next word (2) refreshes instantaneously.</p>
+
+<p><img src="./ShinyApp.PNG" alt=""> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>The class Predict vs. Test Data</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>In my anlysis part, I had to use very small training dataset because of my limited computer resources. As a result, my test data did not and class predict was not good. But while creating n-gram tockenized data for Shiny Apps use, I could increase the sample sizes and my predicting words had very good result. Here 1=blogs, 2=news, 3=twitter. Test sample sizes: 1000 rows blogs, 1500 rows news &amp; 1500 rows twitter.
+table(classPredict, datatest$classTrainVec)</p>
+
+<table><thead>
+<tr>
+<th>classPredict</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1.34210526315789</td>
+<td>12</td>
+<td>10</td>
+<td>2</td>
+</tr>
+<tr>
+<td>1.57777777777778</td>
+<td>17</td>
+<td>7</td>
+<td>7</td>
+</tr>
+<tr>
+<td>1.81</td>
+<td>46</td>
+<td>39</td>
+<td>31</td>
+</tr>
+<tr>
+<td>1.84</td>
+<td>69</td>
+<td>141</td>
+<td>20</td>
+</tr>
+<tr>
+<td>1.86021505376344</td>
+<td>15</td>
+<td>35</td>
+<td>4</td>
+</tr>
+<tr>
+<td>1.92513368983957</td>
+<td>16</td>
+<td>35</td>
+<td>23</td>
+</tr>
+<tr>
+<td>1.93522267206478</td>
+<td>13</td>
+<td>94</td>
+<td>6</td>
+</tr>
+<tr>
+<td>2.26232665639445</td>
+<td>316</td>
+<td>362</td>
+<td>644</td>
+</tr>
+<tr>
+<td>2.828125</td>
+<td>0</td>
+<td>2</td>
+<td>17</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2</td>
+<td>0</td>
+<td>15</td>
+</tr>
+</tbody></table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='The Objective'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='The Applied Methods &amp; Models'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='The Usage Of The Application'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='The class Predict vs. Test Data'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
